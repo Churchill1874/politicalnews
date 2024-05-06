@@ -16,6 +16,14 @@ public interface EhcacheService {
     Cache getCache(CacheTypeEnum cacheTypeEnum);
 
     /**
+     * 根据类型和key获取缓存
+     * @param cacheTypeEnum
+     * @param key
+     * @return
+     */
+    String getString(CacheTypeEnum cacheTypeEnum, String key);
+
+    /**
      * 校验ip 3秒内频繁点击超过指定次数
      *
      * @param limitCount

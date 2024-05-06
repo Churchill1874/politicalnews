@@ -60,14 +60,10 @@ public class GenerateTools {
     /**
      * 创建tokenId
      *
-     * @param account
      * @return
      */
-    public static String createTokenId(String account) {
-        int accountLength = String.valueOf(account).length();
-        String uuid = UUID.randomUUID().toString().replace("-", "");
-        uuid = uuid.substring(0, uuid.length() - accountLength);
-        return uuid + account;
+    public static String createTokenId() {
+        return UUID.randomUUID().toString().replace("-", "");
     }
 
 

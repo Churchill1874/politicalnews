@@ -35,12 +35,21 @@ public class EhcacheServiceImpl implements EhcacheService {
             return cacheManager.getCache("lock_3_Second");
         }
         if (CacheTypeEnum.VERIFICATION_CODE == cacheTypeEnum){
-            return cacheManager.getCache("verificationCode");
+            return cacheManager.getCache("verification_code");
         }
         if (CacheTypeEnum.BLACKLIST == cacheTypeEnum){
             return cacheManager.getCache("blacklist");
         }
         return null;
+    }
+
+    @Override
+    public String getString(CacheTypeEnum cacheTypeEnum, String key) {
+        Cache cache = getCache(cacheTypeEnum);
+        if (cache == null){
+            return null;
+        }
+        return cache.get(key, String.class);
     }
 
     @Override
