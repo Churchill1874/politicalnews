@@ -21,7 +21,6 @@ public class VerificationCodeController {
     @Autowired
     private EhcacheService ehcacheService;
 
-
     @PostMapping("/get")
     @ApiOperation(value = "获取验证码", notes = "获取验证码")
     public synchronized R<String> get() {
