@@ -2,7 +2,6 @@ package com.news.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.news.common.constant.enums.PlayerRoleEnum;
 import com.news.common.constant.enums.UserStatusEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -61,7 +60,7 @@ public class PlayerInfo extends CreatorBaseInfo implements Serializable {
     @ApiModelProperty("是否机器人")
     private Boolean isBot;
 
-    @TableField("user_status")
+    @TableField("status")
     @ApiModelProperty("状态")
     private UserStatusEnum status;
 
