@@ -65,16 +65,8 @@ public class PlayerInfo extends CreatorBaseInfo implements Serializable {
     @ApiModelProperty("状态")
     private UserStatusEnum status;
 
-    @TableField("is_custom_avatar")
-    @ApiModelProperty("是否使用自定义头像")
-    private Boolean isCustomAvatar;
-
-    @TableField("avatar_number")
-    @ApiModelProperty("公共头像编号")
-    private String avatarNumber;
-
     @TableField("avatar_path")
-    @ApiModelProperty("自定义头像路径")
+    @ApiModelProperty("头像路径")
     private String avatarPath;
 
 }
