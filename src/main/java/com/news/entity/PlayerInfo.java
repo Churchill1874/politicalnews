@@ -21,10 +21,6 @@ public class PlayerInfo extends CreatorBaseInfo implements Serializable {
     @ApiModelProperty("昵称")
     private String name;
 
-    @TableField("birth")
-    @ApiModelProperty("生日")
-    private LocalDate birth;
-
     @TableField("account")
     @ApiModelProperty("账号")
     private String account;
@@ -32,10 +28,6 @@ public class PlayerInfo extends CreatorBaseInfo implements Serializable {
     @TableField("password")
     @ApiModelProperty("密码")
     private String password;
-
-    @TableField("level")
-    @ApiModelProperty("等级")
-    private Integer level;
 
     @TableField("phone")
     @ApiModelProperty("手机号")
@@ -45,13 +37,29 @@ public class PlayerInfo extends CreatorBaseInfo implements Serializable {
     @ApiModelProperty("邮箱")
     private String email;
 
+    @TableField("gender")
+    @ApiModelProperty("性别 1男 0女")
+    private String gender;
+
+    @TableField("city")
+    @ApiModelProperty("城市")
+    private String city;
+
+    @TableField("birth")
+    @ApiModelProperty("生日")
+    private LocalDate birth;
+
+    @TableField("level")
+    @ApiModelProperty("等级")
+    private Integer level;
+
     @TableField("self_introduction")
     @ApiModelProperty("自我介绍")
     private String selfIntroduction;
 
-    @TableField("role")
-    @ApiModelProperty("角色")
-    private PlayerRoleEnum role;
+    @TableField("is_bot")
+    @ApiModelProperty("是否机器人")
+    private Boolean isBot;
 
     @TableField("user_status")
     @ApiModelProperty("状态")
