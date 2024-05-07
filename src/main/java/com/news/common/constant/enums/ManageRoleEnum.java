@@ -7,12 +7,11 @@ import lombok.Getter;
 /**
  * 角色枚举
  */
-public enum RoleEnum  {
+public enum ManageRoleEnum {
 
-    BOT(0, "机器人"),
-    PLAYER(1, "玩家"),
-    ADMIN(2, "管理员"),
-    SUPER_ADMIN(3, "超级管理员");
+
+    ADMIN(1, "管理员"),
+    SUPER_ADMIN(2, "超级管理员");
 
     @Getter
     @EnumValue
@@ -22,7 +21,7 @@ public enum RoleEnum  {
     @JsonValue
     private String name;
 
-    RoleEnum(int code, String name) {
+    ManageRoleEnum(int code, String name) {
         this.code = code;
         this.name = name;
     }

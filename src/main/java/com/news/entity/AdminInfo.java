@@ -2,7 +2,7 @@ package com.news.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.news.common.constant.enums.RoleEnum;
+import com.news.common.constant.enums.ManageRoleEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -29,6 +29,6 @@ public class AdminInfo extends CreatorBaseInfo implements Serializable {
 
     @TableField("role")
     @ApiModelProperty("角色")
-    private RoleEnum role;
+    private ManageRoleEnum role;
 
 }

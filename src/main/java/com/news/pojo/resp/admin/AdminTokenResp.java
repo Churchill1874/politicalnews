@@ -1,6 +1,6 @@
 package com.news.pojo.resp.admin;
 
-import com.news.common.constant.enums.RoleEnum;
+import com.news.common.constant.enums.ManageRoleEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -18,7 +18,7 @@ public class AdminTokenResp implements Serializable {
     private String account;
 
     @ApiModelProperty("角色")
-    private RoleEnum role;
+    private ManageRoleEnum role;
 
     @ApiModelProperty("登陆时间")
     private LocalDateTime loginTime;

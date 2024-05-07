@@ -2,6 +2,7 @@ package com.news.controller.manage;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.news.common.annotation.AdminLoginCheck;
 import com.news.common.constant.enums.CacheTypeEnum;
@@ -11,7 +12,9 @@ import com.news.common.tools.CodeTools;
 import com.news.common.tools.GenerateTools;
 import com.news.common.tools.HttpTools;
 import com.news.entity.AdminInfo;
+import com.news.pojo.req.PageBase;
 import com.news.pojo.req.admin.AdminLoginReq;
+import com.news.pojo.req.admin.AdminPageReq;
 import com.news.pojo.resp.admin.AdminTokenResp;
 import com.news.service.AdminInfoService;
 import com.news.service.EhcacheService;
@@ -62,8 +65,18 @@ public class AdminInfoController {
         cache.put(tokenId, adminTokenResp);
 
         return R.ok(adminTokenResp);
+    }
 
 
+    @AdminLoginCheck
+    @PostMapping("/queryPage")
+    @ApiOperation(value = "分页", notes = "分页")
+    public R<IPage<AdminInfo>> queryPage(@RequestBody @Valid AdminPageReq req) {
+        log.info("分页查询管理员入参:{}", JSONUtil.toJsonStr(req));
+        AdminInfo adminInfo = BeanUtil.toBean(req, AdminInfo.class);
+
+        IPage<AdminInfo> iPage = adminInfoService.queryPage(adminInfo, req.getPageNumber(), req.getPageSize());
+        return R.ok(iPage);
     }
 
 
