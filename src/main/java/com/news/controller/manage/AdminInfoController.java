@@ -52,7 +52,7 @@ public class AdminInfoController {
             throw new DataException("验证码有误");
         }
 
-        AdminInfo adminInfo = adminInfoService.findByAccountAndPassword(req.getAccount(), req.getPassword());
+        AdminInfo adminInfo = adminInfoService.findByAccount(req.getAccount());
         if (adminInfo == null || !adminInfo.getPassword().equals(CodeTools.md5AndSalt(req.getPassword()))) {
             throw new AccountOrPasswordException();
         }

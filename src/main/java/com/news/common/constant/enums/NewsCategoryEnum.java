@@ -17,10 +17,10 @@ public enum NewsCategoryEnum {
 
     @Getter
     @EnumValue
+    @JsonValue
     private int code;
 
     @Getter
-    @JsonValue
     private String name;
 
     NewsCategoryEnum(int code, String name) {

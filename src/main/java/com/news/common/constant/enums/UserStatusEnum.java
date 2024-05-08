@@ -14,10 +14,10 @@ public enum UserStatusEnum {
 
     @Getter
     @JsonValue
+    @EnumValue
     private String name;
 
     @Getter
-    @EnumValue
     private Integer code;
 
     UserStatusEnum(String name,Integer code){

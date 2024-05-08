@@ -11,10 +11,10 @@ public enum PlayerRoleEnum {
 
     @Getter
     @EnumValue
+    @JsonValue
     private int code;
 
     @Getter
-    @JsonValue
     private String name;
 
     PlayerRoleEnum(int code, String name) {

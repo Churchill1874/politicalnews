@@ -9,16 +9,15 @@ import lombok.Getter;
  */
 public enum ManageRoleEnum {
 
-
     ADMIN(1, "管理员"),
     SUPER_ADMIN(2, "超级管理员");
 
     @Getter
     @EnumValue
+    @JsonValue
     private int code;
 
     @Getter
-    @JsonValue
     private String name;
 
     ManageRoleEnum(int code, String name) {

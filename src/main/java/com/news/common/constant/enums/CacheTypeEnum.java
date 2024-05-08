@@ -14,10 +14,10 @@ public enum CacheTypeEnum {
 
     @Getter
     @EnumValue
+    @JsonValue
     private String code;
 
     @Getter
-    @JsonValue
     private String name;
 
     CacheTypeEnum(String code, String name) {
