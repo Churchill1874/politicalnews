@@ -1,6 +1,7 @@
 package com.news.config;
 
 import com.news.common.constant.enums.ManageRoleEnum;
+import com.news.common.tools.CodeTools;
 import com.news.entity.AdminInfo;
 import com.news.service.AdminInfoService;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +38,7 @@ public class InitConfig {
             adminInfo = new AdminInfo();
             adminInfo.setAccount(SUPER_ADMIN_ACCOUNT);
             adminInfo.setName("超级管理员");
-            adminInfo.setPassword(PASSWORD);
+            adminInfo.setPassword(CodeTools.md5AndSalt(PASSWORD));
             adminInfo.setRole(ManageRoleEnum.SUPER_ADMIN);
             adminInfo.setCreateName("系统");
             adminInfo.setCreateTime(LocalDateTime.now());
