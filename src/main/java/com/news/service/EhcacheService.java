@@ -3,6 +3,8 @@ package com.news.service;
 import com.news.common.constant.enums.CacheTypeEnum;
 import org.springframework.cache.Cache;
 
+import java.util.Set;
+
 /**
  * 缓存服务
  */
@@ -29,7 +31,7 @@ public interface EhcacheService {
      * @param limitCount
      * @return
      */
-    boolean checkIp3SecondsClick(Integer limitCount, String remarks);
+    void checkIp3SecondsClick(Integer limitCount, String remarks);
 
     /**
      * 获取验证码 并设置每3秒的限制请求次数 和提示语
@@ -38,5 +40,11 @@ public interface EhcacheService {
      * @return
      */
     String getVC(String key, Integer limitCount, String remarks);
+
+    /**
+     * 获取黑名单ip集合set
+     * @return
+     */
+    Set<String> getBlacklistIpSetCache();
 
 }

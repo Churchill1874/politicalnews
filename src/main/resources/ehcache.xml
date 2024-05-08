@@ -86,7 +86,7 @@
 
     <cache name="blacklist"
            eternal="false"
-           maxElementsInMemory="200"
+           maxElementsInMemory="1000"
            overflowToDisk="false"
            diskPersistent="false"
            timeToIdleSeconds="0"

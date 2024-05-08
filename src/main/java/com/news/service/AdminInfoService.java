@@ -3,6 +3,7 @@ package com.news.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.news.entity.AdminInfo;
+import com.news.pojo.req.PageBase;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface AdminInfoService extends IService<AdminInfo> {
 
     List<AdminInfo> queryList(AdminInfo adminInfo);
 
-    IPage<AdminInfo> queryPage(AdminInfo adminInfo, Integer pageNumber, Integer pageSize);
+    IPage<AdminInfo> queryPage(AdminInfo adminInfo, PageBase pageBase);
 
 
 }

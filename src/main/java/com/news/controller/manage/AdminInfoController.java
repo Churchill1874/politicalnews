@@ -41,7 +41,6 @@ public class AdminInfoController {
     @Autowired
     private AdminInfoService adminInfoService;
 
-    @AdminLoginCheck
     @PostMapping("/login")
     @ApiOperation(value = "登录", notes = "登录")
     public R<AdminTokenResp> login(@RequestBody @Valid AdminLoginReq req) {
@@ -67,15 +66,15 @@ public class AdminInfoController {
         return R.ok(adminTokenResp);
     }
 
-
-    @AdminLoginCheck
     @PostMapping("/queryPage")
     @ApiOperation(value = "分页", notes = "分页")
     public R<IPage<AdminInfo>> queryPage(@RequestBody @Valid AdminPageReq req) {
         log.info("分页查询管理员入参:{}", JSONUtil.toJsonStr(req));
         AdminInfo adminInfo = BeanUtil.toBean(req, AdminInfo.class);
 
-        IPage<AdminInfo> iPage = adminInfoService.queryPage(adminInfo, req.getPageNumber(), req.getPageSize());
+        PageBase pageBase = BeanUtil.toBean(req, PageBase.class);
+
+        IPage<AdminInfo> iPage = adminInfoService.queryPage(adminInfo, pageBase);
         return R.ok(iPage);
     }
 

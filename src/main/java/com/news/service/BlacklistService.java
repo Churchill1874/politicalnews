@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.news.entity.Blacklist;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * 黑名单服务
@@ -47,7 +48,13 @@ public interface BlacklistService extends IService<Blacklist> {
      * @param ip
      * @return
      */
-    List<Blacklist> findByIp(String ip);
+    Blacklist findByIp(String ip);
+
+    /**
+     * 获取所有ip集合set
+     * @return
+     */
+    Set<String> getIpSet();
 
 
 }

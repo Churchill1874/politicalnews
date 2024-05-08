@@ -16,7 +16,7 @@ public class PerMinuteTask {
      */
     @Scheduled(cron = "0 */1 * * * ?")
     public void perMinute() {
-        log.info("每分钟执行1次,通过判断当前时间执行定时任务,避免多个定时任务");
+
     }
 
 }

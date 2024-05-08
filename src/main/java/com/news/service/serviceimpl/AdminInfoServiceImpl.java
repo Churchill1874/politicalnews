@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.news.entity.AdminInfo;
 import com.news.mapper.AdminInfoMapper;
+import com.news.pojo.req.PageBase;
 import com.news.service.AdminInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -39,7 +40,7 @@ public class AdminInfoServiceImpl extends ServiceImpl<AdminInfoMapper, AdminInfo
      * @param adminInfo
      * @return
      */
-    public QueryWrapper<AdminInfo> getAdminQueryWrapper(AdminInfo adminInfo){
+    public QueryWrapper<AdminInfo> getAdminQueryWrapper(AdminInfo adminInfo, PageBase pageBase){
         QueryWrapper<AdminInfo> queryWrapper = new QueryWrapper<>();
 
         queryWrapper.lambda()
@@ -48,6 +49,8 @@ public class AdminInfoServiceImpl extends ServiceImpl<AdminInfoMapper, AdminInfo
                 .eq(StringUtils.isNotBlank(adminInfo.getName()), AdminInfo::getName, adminInfo.getName())
                 .eq(adminInfo.getRole() != null, AdminInfo::getRole, adminInfo.getRole())
                 .eq(adminInfo.getId() != null, AdminInfo::getId, adminInfo.getId())
+                .ge(pageBase.getStartTime() != null, AdminInfo::getCreateTime, pageBase.getStartTime())
+                .le(pageBase.getEndTime() != null, AdminInfo::getCreateTime, pageBase.getEndTime())
                 .orderByDesc(AdminInfo::getCreateTime);
 
         return queryWrapper;
@@ -55,14 +58,14 @@ public class AdminInfoServiceImpl extends ServiceImpl<AdminInfoMapper, AdminInfo
 
     @Override
     public List<AdminInfo> queryList(AdminInfo adminInfo) {
-        QueryWrapper<AdminInfo> queryWrapper = getAdminQueryWrapper(adminInfo);
+        QueryWrapper<AdminInfo> queryWrapper = getAdminQueryWrapper(adminInfo, new PageBase());
         return list(queryWrapper);
     }
 
     @Override
-    public IPage<AdminInfo> queryPage(AdminInfo adminInfo, Integer pageNumber, Integer pageSize) {
-        QueryWrapper<AdminInfo> queryWrapper = getAdminQueryWrapper(adminInfo);
-        IPage<AdminInfo> iPage = new Page<>(pageNumber, pageSize);
+    public IPage<AdminInfo> queryPage(AdminInfo adminInfo, PageBase pageBase) {
+        QueryWrapper<AdminInfo> queryWrapper = getAdminQueryWrapper(adminInfo, pageBase);
+        IPage<AdminInfo> iPage = new Page<>(pageBase.getPageNumber(), pageBase.getPageSize());
         return page(iPage, queryWrapper);
     }
 

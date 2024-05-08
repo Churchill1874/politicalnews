@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Data
 @TableName("blacklist")
 @ApiModel("黑名单")
-public class Blacklist extends BaseInfo implements Serializable {
+public class Blacklist extends CreatorBaseInfo implements Serializable {
 
     private static final long serialVersionUID = -3324921096334389678L;
 
