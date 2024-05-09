@@ -24,7 +24,7 @@ public class VerificationCodeController {
     @PostMapping("/get")
     @ApiOperation(value = "获取验证码", notes = "获取验证码")
     public synchronized R<String> get() {
-        return R.ok(ehcacheService.getVC(HttpTools.getIp(),10,"每3秒超过10次点击验证码"));
+        return R.ok(ehcacheService.getVC(HttpTools.getIp(),30,"每3秒超过30次点击验证码"));
     }
 
 }
