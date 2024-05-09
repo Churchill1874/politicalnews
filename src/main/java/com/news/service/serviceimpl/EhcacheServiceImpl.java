@@ -75,11 +75,13 @@ public class EhcacheServiceImpl implements EhcacheService {
                 Blacklist blacklist = blacklistService.findByIp(ip);
                 if (blacklist != null) {
                     blacklist.setUpdateTime(LocalDateTime.now());
+                    blacklist.setUpdateName("系统");
                     blacklistService.updateById(blacklist);
                 } else { //否则就新增
                     blacklist = new Blacklist();
                     blacklist.setIp(ip);
                     blacklist.setRemarks(remarks);
+                    blacklist.setCreateName("系统");
                     blacklistService.insert(blacklist);
                 }
                 throw new IpException();
@@ -109,6 +111,12 @@ public class EhcacheServiceImpl implements EhcacheService {
     public Set<String> getBlacklistIpSetCache() {
         Cache cache = getCache(CacheTypeEnum.BLACKLIST);
         return cache.get(BLACKLIST_SET_KEY, Set.class);
+    }
+
+    @Override
+    public void setBlacklistIpSetCache(Set<String> blacklistIpSet) {
+        Cache cache = getCache(CacheTypeEnum.BLACKLIST);
+        cache.put(BLACKLIST_SET_KEY, blacklistIpSet);
     }
 
 

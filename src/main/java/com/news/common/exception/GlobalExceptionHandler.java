@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(IpException.class)
     public R errorIpException(IpException e) {
-        log.error("获取ip失败:{}", e.getMessage());
+        log.error("ip被拉黑:{}", e.getMessage());
         return R.failed(e.getMessage()).setCode(e.getCode());
     }
 

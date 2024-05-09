@@ -47,4 +47,10 @@ public interface EhcacheService {
      */
     Set<String> getBlacklistIpSetCache();
 
+    /**
+     * 更新设置黑名单ip集合set
+     * @return
+     */
+    void setBlacklistIpSetCache(Set<String> blacklistIpSet);
+
 }

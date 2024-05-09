@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,7 @@ import java.util.Set;
 @Service
 public class BlacklistServiceImpl extends ServiceImpl<BlacklistMapper, Blacklist> implements BlacklistService {
 
+    @Lazy
     @Autowired
     private EhcacheService ehcacheService;
 
@@ -92,6 +94,8 @@ public class BlacklistServiceImpl extends ServiceImpl<BlacklistMapper, Blacklist
             }
         }
 
+        //更新黑名单缓存
+        ehcacheService.setBlacklistIpSetCache(set);
         return set;
     }
 

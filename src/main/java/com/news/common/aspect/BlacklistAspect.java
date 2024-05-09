@@ -21,7 +21,7 @@ public class BlacklistAspect {
     @Autowired
     private BlacklistService blacklistService;
 
-    @Pointcut("execution(* com.news.controller.*.*(..))")
+    @Pointcut("execution(* com.news.controller.*.*.*(..))")
     public void blacklistPointCut() {
     }
 
