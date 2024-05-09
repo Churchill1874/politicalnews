@@ -2,6 +2,7 @@ package com.news.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.news.common.constant.enums.LevelTypeEnum;
 import com.news.common.constant.enums.UserStatusEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -50,7 +51,7 @@ public class PlayerInfo extends CreatorBaseInfo implements Serializable {
 
     @TableField("level")
     @ApiModelProperty("等级")
-    private Integer level;
+    private LevelTypeEnum level;
 
     @TableField("self_introduction")
     @ApiModelProperty("自我介绍")

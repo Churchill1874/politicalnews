@@ -20,7 +20,7 @@ import java.util.UUID;
 @RestController
 @Api(tags = "验证码")
 @RequestMapping("/player/tools")
-public class ToolsController {
+public class ToolsApi {
 
     @PostMapping("/upload")
     public R<String> handleFileUpload(@RequestPart("file") MultipartFile file) {
