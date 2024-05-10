@@ -7,8 +7,9 @@ import com.news.pojo.req.PageBase;
 
 public interface PlayerInfoService extends IService<PlayerInfo> {
 
-
     IPage<PlayerInfo> queryPage(PlayerInfo playerInfo, PageBase pageBase);
+
+    PlayerInfo findByAccount(String account);
 
     void add(PlayerInfo playerInfo);
 

@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.news.common.constant.enums.UserStatusEnum;
 import com.news.entity.PlayerInfo;
 import com.news.mapper.PlayerInfoMapper;
 import com.news.pojo.req.PageBase;
@@ -12,8 +11,6 @@ import com.news.service.PlayerInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 
 @Slf4j
 @Service
@@ -38,6 +35,13 @@ public class PlayerInfoServiceImpl extends ServiceImpl<PlayerInfoMapper, PlayerI
                 .eq(pageBase.getEndTime() != null, PlayerInfo::getCreateTime, pageBase.getEndTime())
                 .orderByDesc(PlayerInfo::getCreateTime);
         return page(iPage, queryWrapper);
+    }
+
+    @Override
+    public PlayerInfo findByAccount(String account) {
+        QueryWrapper<PlayerInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(PlayerInfo::getAccount, account);
+        return getOne(queryWrapper);
     }
 
     @Override
