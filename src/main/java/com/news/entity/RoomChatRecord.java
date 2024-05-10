@@ -17,7 +17,7 @@ public class RoomChatRecord extends BaseInfo implements Serializable {
 
     @TableField("account")
     @ApiModelProperty("发送人账号")
-    private String account;
+    private Integer account;
 
     @TableField("is_reply")
     @ApiModelProperty("是否是回复消息")
@@ -37,7 +37,7 @@ public class RoomChatRecord extends BaseInfo implements Serializable {
 
     @TableField("target_account")
     @ApiModelProperty("目标账号")
-    private String targetAccount;
+    private Integer targetAccount;
 
     @TableField("target_read")
     @ApiModelProperty("目标是否已读")
