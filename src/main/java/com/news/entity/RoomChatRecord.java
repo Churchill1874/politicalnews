@@ -3,6 +3,7 @@ package com.news.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.news.common.constant.enums.SendTypeEnum;
+import com.news.entity.base.BaseInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

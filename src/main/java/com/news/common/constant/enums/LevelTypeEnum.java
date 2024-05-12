@@ -36,17 +36,17 @@ public enum LevelTypeEnum {
 
     //评论被点赞次数
     @Getter
-    private int likesReceived;
+    private int likesReceivedCount;
 
     //新闻正确下注猜对结果次数
     @Getter
     private int correctCount;
 
-    LevelTypeEnum(int code, String name,int commentCount, int likesReceived, int correctCount) {
+    LevelTypeEnum(int code, String name,int commentCount, int likesReceivedCount, int correctCount) {
         this.code = code;
         this.name = name;
         this.commentCount = commentCount;
-        this.likesReceived = likesReceived;
+        this.likesReceivedCount = likesReceivedCount;
         this.correctCount = correctCount;
     }
 

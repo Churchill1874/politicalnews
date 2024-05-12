@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.news.common.constant.enums.LevelTypeEnum;
 import com.news.common.constant.enums.UserStatusEnum;
+import com.news.entity.base.CreatorBaseInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

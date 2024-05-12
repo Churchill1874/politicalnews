@@ -1,10 +1,11 @@
-package com.news.entity;
+package com.news.entity.base;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.news.entity.base.BaseInfo;
 import lombok.Data;
 
 @Data
-public class CreatorBaseInfo extends BaseInfo{
+public class CreatorBaseInfo extends BaseInfo {
     private static final long serialVersionUID = 161115347113930564L;
     //创建人
     @TableField("create_name")

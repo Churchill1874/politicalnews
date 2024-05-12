@@ -2,6 +2,7 @@ package com.news.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.news.entity.base.CreatorBaseInfo;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
