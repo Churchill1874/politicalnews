@@ -28,7 +28,7 @@ public class ToolController {
             levelTypeResp.setLevel(levelTypeEnum.getCode());
             levelTypeResp.setName(levelTypeEnum.getName());
             levelTypeResp.setCommentCount(levelTypeEnum.getCommentCount());
-            levelTypeResp.setLikesReceived(levelTypeEnum.getLikesReceived());
+            levelTypeResp.setLikesReceivedCount(levelTypeEnum.getLikesReceivedCount());
             levelTypeResp.setCorrectCount(levelTypeEnum.getCorrectCount());
             levelTypeRespList.add(levelTypeResp);
         }

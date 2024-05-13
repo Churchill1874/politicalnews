@@ -19,7 +19,7 @@ public class LevelTypeResp implements Serializable {
     private int commentCount;
 
     @ApiModelProperty("需要被赞评论总数量")
-    private int likesReceived;
+    private int likesReceivedCount;
 
     @ApiModelProperty("需要下注猜对总数量")
     private int correctCount;

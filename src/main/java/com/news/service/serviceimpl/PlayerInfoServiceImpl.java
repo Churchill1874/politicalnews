@@ -2,6 +2,7 @@ package com.news.service.serviceimpl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.news.entity.PlayerInfo;
@@ -11,6 +12,8 @@ import com.news.service.PlayerInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -22,7 +25,7 @@ public class PlayerInfoServiceImpl extends ServiceImpl<PlayerInfoMapper, PlayerI
         QueryWrapper<PlayerInfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda()
                 .eq(StringUtils.isNotBlank(playerInfo.getName()), PlayerInfo::getName, playerInfo.getName())
-                .eq(StringUtils.isNotBlank(playerInfo.getAccount()), PlayerInfo::getAccount, playerInfo.getAccount())
+                .eq(playerInfo.getAccount() != null, PlayerInfo::getAccount, playerInfo.getAccount())
                 .eq(StringUtils.isNotBlank(playerInfo.getPhone()), PlayerInfo::getPhone, playerInfo.getPhone())
                 .eq(StringUtils.isNotBlank(playerInfo.getEmail()), PlayerInfo::getEmail, playerInfo.getEmail())
                 .eq(StringUtils.isNotBlank(playerInfo.getCity()), PlayerInfo::getCity, playerInfo.getCity())
@@ -47,6 +50,21 @@ public class PlayerInfoServiceImpl extends ServiceImpl<PlayerInfoMapper, PlayerI
     @Override
     public void add(PlayerInfo playerInfo) {
         save(playerInfo);
+    }
+
+    @Override
+    public PlayerInfo maxAccountPlayer() {
+        IPage<PlayerInfo> iPage = new Page<>(1,1);
+
+        QueryWrapper<PlayerInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().orderByDesc(PlayerInfo::getAccount);
+        iPage = page(iPage, queryWrapper);
+
+        if (CollectionUtils.isEmpty(iPage.getRecords())){
+            return null;
+        }
+
+        return iPage.getRecords().get(0);
     }
 
 }

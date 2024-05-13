@@ -13,4 +13,6 @@ public interface PlayerInfoService extends IService<PlayerInfo> {
 
     void add(PlayerInfo playerInfo);
 
+    PlayerInfo maxAccountPlayer();
+
 }
