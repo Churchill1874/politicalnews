@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.json.JSON;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.api.R;
+import com.news.common.constant.enums.CacheTypeEnum;
 import com.news.common.constant.enums.GenderEnum;
 import com.news.common.exception.DataException;
 import com.news.common.tools.CodeTools;
@@ -79,9 +80,12 @@ public class PlayerInfoApi {
         playerInfo.setGender(req.getGender());
         playerInfoService.save(playerInfo);
 
+        String tokenId = GenerateTools.createTokenId();
         PlayerTokenResp playerTokenResp = BeanUtil.toBean(playerInfo, PlayerTokenResp.class);
-        playerTokenResp.setTokenId(GenerateTools.createTokenId());
+        playerTokenResp.setTokenId(tokenId);
         playerTokenResp.setLoginTime(LocalDateTime.now());
+
+        ehcacheService.getCache(CacheTypeEnum.PLAYER_TOKEN).put(tokenId, playerTokenResp);
         return R.ok(playerTokenResp);
     }
 

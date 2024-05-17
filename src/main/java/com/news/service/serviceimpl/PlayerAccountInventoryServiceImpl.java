@@ -75,7 +75,7 @@ public class PlayerAccountInventoryServiceImpl extends ServiceImpl<PlayerAccount
         if (CollectionUtils.isEmpty(playerAccountInventoryList)) {//如果账号库空了
             PlayerInfo playerInfo = playerInfoService.maxAccountPlayer();//查询最大的玩家账号
             if (playerInfo == null) {//目前一个玩家没有的情况
-                batchInsertAccount(10000);
+                batchInsertAccount(20000);//玩家账号从20000开始
                 log.info("初始批量插入账号库,使用时间:{} 毫秒", Duration.between(startTime, LocalDateTime.now()).toMillis());
             }
             if (playerInfo != null) {//如果目前最大账号的玩家不为空 从最大账号的下一位账号开始批量增加账号库
