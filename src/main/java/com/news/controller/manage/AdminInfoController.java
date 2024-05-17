@@ -52,7 +52,7 @@ public class AdminInfoController {
         }
 
         AdminInfo adminInfo = adminInfoService.findByAccount(req.getAccount());
-        if (adminInfo == null || !adminInfo.getPassword().equals(CodeTools.md5AndSalt(req.getPassword()))) {
+        if (adminInfo == null || !adminInfo.getPassword().equals(CodeTools.md5AndSalt(req.getPassword(), adminInfo.getSalt()))) {
             throw new AccountOrPasswordException();
         }
 

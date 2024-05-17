@@ -11,6 +11,8 @@ public interface PlayerInfoService extends IService<PlayerInfo> {
 
     PlayerInfo findByAccount(String account);
 
+    PlayerInfo findByName(String name);
+
     void add(PlayerInfo playerInfo);
 
     PlayerInfo maxAccountPlayer();

@@ -63,6 +63,15 @@ public class GenerateTools {
      * @return
      */
     public static String createTokenId() {
+        return getUUID();
+    }
+
+    /**
+     * 获取没有-符号的uuid
+     *
+     * @return
+     */
+    public static String getUUID() {
         return UUID.randomUUID().toString().replace("-", "");
     }
 

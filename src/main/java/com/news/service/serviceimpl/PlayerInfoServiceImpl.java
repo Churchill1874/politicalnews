@@ -13,8 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Slf4j
 @Service
 public class PlayerInfoServiceImpl extends ServiceImpl<PlayerInfoMapper, PlayerInfo> implements PlayerInfoService {
@@ -48,19 +46,26 @@ public class PlayerInfoServiceImpl extends ServiceImpl<PlayerInfoMapper, PlayerI
     }
 
     @Override
+    public PlayerInfo findByName(String name) {
+        QueryWrapper<PlayerInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(PlayerInfo::getName, name);
+        return getOne(queryWrapper);
+    }
+
+    @Override
     public void add(PlayerInfo playerInfo) {
         save(playerInfo);
     }
 
     @Override
     public PlayerInfo maxAccountPlayer() {
-        IPage<PlayerInfo> iPage = new Page<>(1,1);
+        IPage<PlayerInfo> iPage = new Page<>(1, 1);
 
         QueryWrapper<PlayerInfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().orderByDesc(PlayerInfo::getAccount);
         iPage = page(iPage, queryWrapper);
 
-        if (CollectionUtils.isEmpty(iPage.getRecords())){
+        if (CollectionUtils.isEmpty(iPage.getRecords())) {
             return null;
         }
 

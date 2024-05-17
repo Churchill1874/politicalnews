@@ -1,5 +1,9 @@
 package com.news.common.aspect;
 
+import com.news.common.constant.enums.UserStatusEnum;
+import com.news.common.exception.AuthException;
+import com.news.common.tools.TokenTools;
+import com.news.pojo.resp.player.PlayerTokenResp;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -20,10 +24,10 @@ public class PlayerLoginCheck {
 
     @Before("playerLoginCheck()")
     public void beforeCut(JoinPoint joinPoint) {
-        /*PlayerToken playerToken = TokenTools.getPlayerToken();
-        if (token.getRole() != RoleEnum.PLAYER.getCode() || token.getStatus() == UserStatusEnum.DISABLE.getCode()) {
+        PlayerTokenResp playerTokenResp = TokenTools.getPlayerToken();
+        if (playerTokenResp.getStatus() == UserStatusEnum.DISABLE) {
             throw new AuthException();
-        }*/
+        }
     }
 
 /*    @After("loginCheck()")
