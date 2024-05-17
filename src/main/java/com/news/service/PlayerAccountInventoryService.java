@@ -11,7 +11,6 @@ public interface PlayerAccountInventoryService extends IService<PlayerAccountInv
     int getRandomAccount();
 
     //账号库存补充定时任务
-    @Async
-    void insertTask();
+    void startUpInsertInventory();
 
 }

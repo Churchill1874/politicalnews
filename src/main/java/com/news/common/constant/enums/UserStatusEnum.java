@@ -14,9 +14,9 @@ public enum UserStatusEnum {
 
     @Getter
     @JsonValue
-    @EnumValue
     private String name;
 
+    @EnumValue
     @Getter
     private Integer code;
 

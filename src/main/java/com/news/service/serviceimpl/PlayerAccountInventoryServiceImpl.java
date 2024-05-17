@@ -49,7 +49,7 @@ public class PlayerAccountInventoryServiceImpl extends ServiceImpl<PlayerAccount
     //根据起始账号 和 指定条数 批量插入账号
     private void batchInsertAccount(int startAccount) {
         List<PlayerAccountInventory> playerAccountInventoryList = new ArrayList<>();
-        int INSERT_COUNT = 1000;//每次插入账号库的条数
+        int INSERT_COUNT = 100000;//每次插入账号库的条数
 
         for (int i = 0; i < INSERT_COUNT; i++) {
             PlayerAccountInventory accountInventory = new PlayerAccountInventory();
@@ -62,20 +62,16 @@ public class PlayerAccountInventoryServiceImpl extends ServiceImpl<PlayerAccount
         saveBatch(playerAccountInventoryList);
     }
 
-    @Async
     @Override
-    public void insertTask() {
+    public void startUpInsertInventory() {
         LocalDateTime startTime = LocalDateTime.now();//计算开始时间
 
-        QueryWrapper<PlayerAccountInventory> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().orderByDesc(PlayerAccountInventory::getAccount);
-        List<PlayerAccountInventory> playerAccountInventoryList = list(queryWrapper);//获取所有账号库存 并且按照账号大小降序
+        int inventoryCount = count();//账号库总条数
 
-
-        if (CollectionUtils.isEmpty(playerAccountInventoryList)) {//如果账号库空了
+        if (inventoryCount == 0) {//如果账号库空了
             PlayerInfo playerInfo = playerInfoService.maxAccountPlayer();//查询最大的玩家账号
             if (playerInfo == null) {//目前一个玩家没有的情况
-                batchInsertAccount(20000);//玩家账号从20000开始
+                batchInsertAccount(10001);//玩家账号从10001开始
                 log.info("初始批量插入账号库,使用时间:{} 毫秒", Duration.between(startTime, LocalDateTime.now()).toMillis());
             }
             if (playerInfo != null) {//如果目前最大账号的玩家不为空 从最大账号的下一位账号开始批量增加账号库
@@ -84,10 +80,17 @@ public class PlayerAccountInventoryServiceImpl extends ServiceImpl<PlayerAccount
             }
         }
 
+        if (inventoryCount > 0 && inventoryCount <= 10000) {//如果账号库还有账号,但是小于等于10000条
+            IPage<PlayerAccountInventory> iPage = new Page<>(1,1);
+            QueryWrapper<PlayerAccountInventory> queryWrapper = new QueryWrapper<>();
+            queryWrapper.lambda().orderByDesc(PlayerAccountInventory::getAccount);
+            iPage = page(iPage, queryWrapper);
 
-        if (CollectionUtils.isNotEmpty(playerAccountInventoryList) && playerAccountInventoryList.size() <= 100) {//如果账号库还有账号,但是小于等于100条
-            PlayerAccountInventory maxAccount = playerAccountInventoryList.get(0);
-            batchInsertAccount(maxAccount.getAccount() + 1);
+            int maxInventoryAccount = iPage.getRecords().get(0).getAccount();//最大的库存账号
+            int maxPlayerAccount = playerInfoService.maxAccountPlayer().getAccount();//最大账号的玩家
+
+            int maxAccount = Math.max(maxInventoryAccount, maxPlayerAccount); //哪个帐号大就用哪个账号开始批量增加账号库
+            batchInsertAccount(maxAccount + 1);
             log.info("账号库小于等于100条,批量补库,使用时间:{} 毫秒", Duration.between(startTime, LocalDateTime.now()).toMillis());
         }
     }

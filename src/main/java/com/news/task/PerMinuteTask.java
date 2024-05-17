@@ -29,8 +29,6 @@ public class PerMinuteTask {
 
         //每10分钟执行一次的任务
         if (minute % 10 == 0){
-            //账号库补库定时任务
-            playerAccountInventoryService.insertTask();
         }
 
     }
