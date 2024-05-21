@@ -3,7 +3,6 @@ package com.news.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.news.entity.PlayerAccountInventory;
-import org.springframework.scheduling.annotation.Async;
 
 public interface PlayerAccountInventoryService extends IService<PlayerAccountInventory> {
 

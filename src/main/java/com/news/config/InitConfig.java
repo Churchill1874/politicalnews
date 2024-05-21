@@ -35,9 +35,8 @@ public class InitConfig {
     private void run() {
         //生成超级管理员
         adminInfoService.initSuperAccount();
-
         //生成玩家账号库
-        playerAccountInventoryService.insertPlayerAccountInventory();
+        playerAccountInventoryService.startUpInsertInventory();
     }
 
 

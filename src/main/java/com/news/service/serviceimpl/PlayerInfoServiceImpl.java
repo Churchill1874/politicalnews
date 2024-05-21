@@ -72,4 +72,17 @@ public class PlayerInfoServiceImpl extends ServiceImpl<PlayerInfoMapper, PlayerI
         return iPage.getRecords().get(0);
     }
 
+
+    //根据登录方式查询账号
+    @Override
+    public PlayerInfo findByLogin(Integer account, String name, String phone, String email) {
+        QueryWrapper<PlayerInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda()
+                .eq(StringUtils.isNotBlank(phone), PlayerInfo::getPhone, phone)
+                .eq(StringUtils.isNotBlank(email), PlayerInfo::getEmail, email)
+                .eq(StringUtils.isNotBlank(name), PlayerInfo::getName, name)
+                .eq(account != null, PlayerInfo::getAccount, account);
+        return getOne(queryWrapper);
+    }
+
 }

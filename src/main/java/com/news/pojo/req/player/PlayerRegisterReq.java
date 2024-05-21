@@ -17,25 +17,24 @@ public class PlayerRegisterReq implements Serializable {
 
     @NotBlank(message = "请输入昵称")
     @Length(max = 20, message = "请输入20位以内的昵称")
-    @ApiModelProperty("昵称")
+    @ApiModelProperty(value = "昵称", required = true)
     private String name;
 
-    @ApiModelProperty("手机号")
+    @ApiModelProperty(value = "手机号")
     private String phone;
 
-    @ApiModelProperty("邮箱")
+    @ApiModelProperty(value = "邮箱")
     private String email;
 
     @NotBlank(message = "请输入密码")
     @Length(max = 20, message = "请输入20位以内的密码")
-    @ApiModelProperty("密码")
+    @ApiModelProperty(value = "密码", required = true)
     private String password;
 
-    @ApiModelProperty("生日")
+    @ApiModelProperty(value = "生日", required = true)
     private LocalDate birth;
 
-    @ApiModelProperty("性别")
+    @ApiModelProperty(value = "性别", required = true)
     private GenderEnum gender;
-
 
 }
