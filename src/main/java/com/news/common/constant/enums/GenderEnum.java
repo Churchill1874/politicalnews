@@ -4,25 +4,20 @@ import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
-/**
- * 用户状态枚举
- */
-public enum UserStatusEnum {
-
-    DISABLE("禁用",0),
-    NORMAL("正常",1);
+public enum GenderEnum {
+    FEMALE(0,"女"),
+    MALE(1,"男");
+    @Getter
+    @EnumValue
+    @JsonValue
+    private int code;
 
     @Getter
-    @JsonValue
     private String name;
 
-    @EnumValue
-    @Getter
-    private Integer code;
-
-    UserStatusEnum(String name,Integer code){
-        this.name = name;
+    GenderEnum(int code, String name) {
         this.code = code;
+        this.name = name;
     }
 
     @Override

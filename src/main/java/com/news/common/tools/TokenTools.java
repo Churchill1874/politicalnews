@@ -3,6 +3,7 @@ package com.news.common.tools;
 import com.news.common.constant.enums.CacheTypeEnum;
 import com.news.common.exception.TokenException;
 import com.news.pojo.resp.admin.AdminTokenResp;
+import com.news.pojo.resp.player.PlayerTokenResp;
 import com.news.service.EhcacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,19 @@ public class TokenTools {
             throw new TokenException();
         }
         return adminTokenResp;
+    }
+
+
+    /**
+     * 获取管理员登录信息
+     * @return
+     */
+    public static PlayerTokenResp getPlayerToken() {
+        PlayerTokenResp playerTokenResp = ehcacheService.getCache(CacheTypeEnum.PLAYER_TOKEN).get(HttpTools.getHeaderToken(), PlayerTokenResp.class);
+        if (playerTokenResp == null) {
+            throw new TokenException();
+        }
+        return playerTokenResp;
     }
 
 

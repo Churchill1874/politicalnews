@@ -17,5 +17,7 @@ public interface AdminInfoService extends IService<AdminInfo> {
 
     IPage<AdminInfo> queryPage(AdminInfo adminInfo, PageBase pageBase);
 
+    void initSuperAccount();
+
 
 }

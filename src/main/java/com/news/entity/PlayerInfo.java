@@ -2,6 +2,7 @@ package com.news.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.news.common.constant.enums.GenderEnum;
 import com.news.common.constant.enums.LevelTypeEnum;
 import com.news.common.constant.enums.UserStatusEnum;
 import com.news.entity.base.CreatorBaseInfo;
@@ -39,8 +40,8 @@ public class PlayerInfo extends CreatorBaseInfo implements Serializable {
     private String email;
 
     @TableField("gender")
-    @ApiModelProperty("性别 1男 0女")
-    private String gender;
+    @ApiModelProperty("性别")
+    private GenderEnum gender;
 
     @TableField("city")
     @ApiModelProperty("城市")
@@ -69,5 +70,9 @@ public class PlayerInfo extends CreatorBaseInfo implements Serializable {
     @TableField("avatar_path")
     @ApiModelProperty("头像路径")
     private String avatarPath;
+
+    @TableField("salt")
+    @ApiModelProperty("盐")
+    private String salt;
 
 }

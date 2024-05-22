@@ -8,4 +8,8 @@ public interface PlayerAccountInventoryService extends IService<PlayerAccountInv
 
     //随机获取玩家账号
     int getRandomAccount();
+
+    //账号库存补充定时任务
+    void startUpInsertInventory();
+
 }

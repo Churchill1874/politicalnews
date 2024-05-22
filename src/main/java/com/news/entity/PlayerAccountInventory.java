@@ -1,6 +1,8 @@
 package com.news.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,7 +17,7 @@ import java.time.LocalDateTime;
 public class PlayerAccountInventory implements Serializable {
     private static final long serialVersionUID = 2958831752897380339L;
 
-    @TableField("id")
+    @TableId(value = "id",type = IdType.AUTO)
     @ApiModelProperty("id")
     private Integer id;
 

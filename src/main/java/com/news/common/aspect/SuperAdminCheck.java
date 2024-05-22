@@ -1,5 +1,9 @@
 package com.news.common.aspect;
 
+import com.news.common.constant.enums.ManageRoleEnum;
+import com.news.common.exception.AuthException;
+import com.news.common.tools.TokenTools;
+import com.news.pojo.resp.admin.AdminTokenResp;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -20,10 +24,10 @@ public class SuperAdminCheck {
 
     @Before("superAdminLoginCheck()")
     public void beforeCut(JoinPoint joinPoint) {
-/*        AdminToken adminToken = TokenTools.getAdminToken();
-        if (adminToken.getRole() != RoleEnum.SUPER_ADMIN) {
+        AdminTokenResp adminTokenResp = TokenTools.getAdminToken();
+        if (adminTokenResp.getRole() != ManageRoleEnum.SUPER_ADMIN) {
             throw new AuthException();
-        }*/
+        }
     }
 
 

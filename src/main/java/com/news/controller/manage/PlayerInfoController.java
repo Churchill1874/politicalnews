@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.news.common.tools.CodeTools;
+import com.news.common.tools.GenerateTools;
 import com.news.common.tools.TokenTools;
 import com.news.entity.PlayerInfo;
 import com.news.pojo.req.Id;
@@ -51,7 +52,9 @@ public class PlayerInfoController {
         if (req.getIsBot() == null) {
             req.setIsBot(true);
         }
-        playerInfo.setPassword(CodeTools.md5AndSalt(req.getPassword()));
+        String salt = GenerateTools.getUUID();
+        playerInfo.setPassword(CodeTools.md5AndSalt(req.getPassword(), salt));
+        playerInfo.setSalt(salt);
         playerInfo.setCreateName(TokenTools.getAdminToken().getName());
         playerInfo.setCreateTime(LocalDateTime.now());
         playerInfoService.add(playerInfo);
