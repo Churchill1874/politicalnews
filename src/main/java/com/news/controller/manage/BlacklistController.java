@@ -50,7 +50,7 @@ public class BlacklistController {
     @PostMapping("/page")
     @ApiOperation(value = "分页黑名单", notes = "分页黑名单")
     public R<IPage<Blacklist>> page(@RequestBody BlacklistPage req) {
-        return R.ok(blacklistService.page(req.getPageNum(), req.getPageSize(), req.getIp(), req.getPhoneNumber(), req.getDevice()));
+        return R.ok(blacklistService.queryPage(req.getPageNum(), req.getPageSize(), req.getIp(), req.getPhoneNumber(), req.getDevice()));
     }
 */
 

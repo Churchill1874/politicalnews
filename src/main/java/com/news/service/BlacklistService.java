@@ -41,7 +41,7 @@ public interface BlacklistService extends IService<Blacklist> {
      * @param phoneNumber
      * @return
      */
-    IPage<Blacklist> page(Integer pageNum,Integer pageSize,String ip,String phoneNumber,String device);
+    IPage<Blacklist> queryPage(Integer pageNum,Integer pageSize,String ip,String phoneNumber,String device);
 
     /**
      * 通过ip获取黑名单记录

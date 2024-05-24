@@ -56,7 +56,7 @@ public class BlacklistServiceImpl extends ServiceImpl<BlacklistMapper, Blacklist
 
     @Override
     //@Cacheable(value = "blacklist",key = "'page'")
-    public IPage<Blacklist> page(Integer pageNum, Integer pageSize, String ip, String phoneNumber, String device) {
+    public IPage<Blacklist> queryPage(Integer pageNum, Integer pageSize, String ip, String phoneNumber, String device) {
         IPage<Blacklist> iPage = new Page<>(pageNum, pageSize);
         QueryWrapper<Blacklist> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda()
