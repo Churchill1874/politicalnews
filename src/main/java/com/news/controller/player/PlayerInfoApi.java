@@ -78,6 +78,12 @@ public class PlayerInfoApi {
         }
     }
 
+    private void checkNameRules(String name){
+        if (!name.matches("^[a-zA-Z0-9]+$")) {
+            throw new DataException("请输入由数字和字母组成的昵称");
+        }
+    }
+
     @PostMapping("/register")
     @ApiOperation(value = "注册", notes = "注册")
     public R<PlayerTokenResp> register(@RequestBody @Valid PlayerRegisterReq req) {
