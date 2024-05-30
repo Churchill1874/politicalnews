@@ -17,7 +17,7 @@ public class LevelProgress extends CreatorBaseInfo implements Serializable {
 
     @TableField("account")
     @ApiModelProperty("账号")
-    private Integer account;
+    private String account;
 
     @TableField("comment_count")
     @ApiModelProperty("评论次数")

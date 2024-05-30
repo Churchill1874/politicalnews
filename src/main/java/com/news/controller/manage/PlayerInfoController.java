@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
 
 @Slf4j
 @RestController
-@Api(tags = "玩家")
+@Api(tags = "玩家管理")
 @RequestMapping("/manage/playerInfo")
 public class PlayerInfoController {
 

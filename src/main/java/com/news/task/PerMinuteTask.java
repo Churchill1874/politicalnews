@@ -1,6 +1,5 @@
 package com.news.task;
 
-import com.news.service.PlayerAccountInventoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -14,9 +13,6 @@ import java.time.LocalDateTime;
 @Slf4j
 @Component
 public class PerMinuteTask {
-
-    @Autowired
-    private PlayerAccountInventoryService playerAccountInventoryService;
 
     /**
      * 每分钟执行定时任务

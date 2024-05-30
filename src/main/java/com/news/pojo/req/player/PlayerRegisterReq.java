@@ -20,6 +20,11 @@ public class PlayerRegisterReq implements Serializable {
     @ApiModelProperty(value = "昵称", required = true)
     private String name;
 
+    @NotBlank(message = "账号不能为空")
+    @Length(min = 4, max = 20, message = "账号长度请设置4-20位之间")
+    @ApiModelProperty(value = "账号", required = true)
+    private String account;
+
     @ApiModelProperty(value = "手机号")
     private String phone;
 

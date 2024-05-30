@@ -23,7 +23,7 @@ public class PlayerLoginReq implements Serializable {
     private String email;
 
     @ApiModelProperty("账号")
-    private Integer account;
+    private String account;
 
     @NotBlank(message = "请输入密码")
     @Length(max = 20, message = "请输入20位以内的密码")

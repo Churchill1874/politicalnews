@@ -75,7 +75,7 @@ public class PlayerInfoServiceImpl extends ServiceImpl<PlayerInfoMapper, PlayerI
 
     //根据登录方式查询账号
     @Override
-    public PlayerInfo findByLogin(Integer account, String name, String phone, String email) {
+    public PlayerInfo findByLogin(String account, String name, String phone, String email) {
         QueryWrapper<PlayerInfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda()
                 .eq(StringUtils.isNotBlank(phone), PlayerInfo::getPhone, phone)

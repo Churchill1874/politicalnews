@@ -13,7 +13,6 @@ import com.news.pojo.req.player.PlayerLoginReq;
 import com.news.pojo.req.player.PlayerRegisterReq;
 import com.news.pojo.resp.player.PlayerTokenResp;
 import com.news.service.EhcacheService;
-import com.news.service.PlayerAccountInventoryService;
 import com.news.service.PlayerInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,9 +32,6 @@ import java.time.LocalDateTime;
 @Api(tags = "玩家")
 @RequestMapping("/player/playerInfo")
 public class PlayerInfoApi {
-
-    @Autowired
-    private PlayerAccountInventoryService playerAccountInventoryService;
     @Autowired
     private PlayerInfoService playerInfoService;
     @Autowired
@@ -98,7 +94,7 @@ public class PlayerInfoApi {
         String salt = GenerateTools.getUUID();
 
         PlayerInfo playerInfo = new PlayerInfo();
-        playerInfo.setAccount(playerAccountInventoryService.getRandomAccount());
+        playerInfo.setAccount(req.getAccount());
         playerInfo.setName(req.getName());
         playerInfo.setPassword(CodeTools.md5AndSalt(req.getPassword(), salt));
         playerInfo.setSalt(salt);
@@ -144,7 +140,7 @@ public class PlayerInfoApi {
         if (StringUtils.isNotBlank(req.getName()) && req.getName().length() > 20) {
             throw new DataException("昵称输入过长");
         }
-        if (req.getAccount() != null && req.getAccount() > 10) {
+        if (StringUtils.isNotBlank(req.getAccount()) && req.getAccount().length() > 20) {
             throw new DataException("账号输入过长");
         }
 
