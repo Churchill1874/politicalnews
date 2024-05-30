@@ -128,7 +128,7 @@ public class PlayerInfoApi {
         log.info("玩家登录入参:{}", JSONUtil.toJsonStr(req));
         checkPasswordRules(req.getPassword());
 
-        if (StringUtils.isAnyBlank(req.getPhone(), req.getName(), req.getEmail()) && req.getAccount() == null) {
+        if (StringUtils.isAnyBlank(req.getPhone(), req.getName(), req.getEmail(), req.getAccount())) {
             throw new DataException("登录方式不能为空");
         }
         if (StringUtils.isNotBlank(req.getEmail()) && req.getEmail().length() > 50) {
