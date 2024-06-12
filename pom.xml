@@ -91,12 +91,6 @@
 			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
 
-		<!--缓存-->
-		<dependency>
-			<groupId>net.sf.ehcache</groupId>
-			<artifactId>ehcache</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
@@ -135,6 +129,13 @@
 			<artifactId>hutool-all</artifactId>
 			<version>5.5.8</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>3.8.1</version>
+		</dependency>
+
 
 	</dependencies>
 

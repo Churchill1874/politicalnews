@@ -3,11 +3,11 @@ package com.news.controller.player;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.api.R;
-import com.news.common.constant.enums.CacheTypeEnum;
 import com.news.common.exception.AccountOrPasswordException;
 import com.news.common.exception.DataException;
 import com.news.common.tools.CodeTools;
 import com.news.common.tools.GenerateTools;
+import com.news.common.tools.HttpTools;
 import com.news.entity.PlayerInfo;
 import com.news.pojo.req.player.PlayerLoginReq;
 import com.news.pojo.req.player.PlayerRegisterReq;
@@ -88,6 +88,11 @@ public class PlayerInfoApi {
     @ApiOperation(value = "注册", notes = "注册")
     public R<PlayerTokenResp> register(@RequestBody @Valid PlayerRegisterReq req) {
         log.info("玩家注册入参:{}", JSONUtil.toJsonStr(req));
+        String verificationCode = ehcacheService.verificationCache().get(HttpTools.getIp());
+        if (verificationCode == null || !verificationCode.equals(req.getVerificationCode())){
+            throw new DataException("验证码有误");
+        }
+
         if (StringUtils.isBlank(req.getPhone()) && StringUtils.isBlank(req.getEmail())) {
             throw new DataException("手机号与邮箱不能同时为空");
         }
@@ -123,7 +128,7 @@ public class PlayerInfoApi {
         playerTokenResp.setTokenId(tokenId);
         playerTokenResp.setLoginTime(LocalDateTime.now());
 
-        ehcacheService.getCache(CacheTypeEnum.PLAYER_TOKEN).put(tokenId, playerTokenResp);
+        ehcacheService.playerTokenCache().put(tokenId, playerTokenResp);
         return playerTokenResp;
     }
 
@@ -132,6 +137,11 @@ public class PlayerInfoApi {
     @ApiOperation(value = "登录", notes = "登录")
     public R<PlayerTokenResp> login(@RequestBody @Valid PlayerLoginReq req) {
         log.info("玩家登录入参:{}", JSONUtil.toJsonStr(req));
+        String verificationCode = ehcacheService.verificationCache().get(HttpTools.getIp());
+        if (verificationCode == null || !verificationCode.equals(req.getVerificationCode())){
+            throw new DataException("验证码有误");
+        }
+
         checkPasswordRules(req.getPassword());
 
         if (StringUtils.isAnyBlank(req.getPhone(), req.getName(), req.getEmail(), req.getAccount())) {

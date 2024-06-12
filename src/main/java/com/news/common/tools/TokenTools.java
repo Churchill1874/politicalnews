@@ -1,6 +1,5 @@
 package com.news.common.tools;
 
-import com.news.common.constant.enums.CacheTypeEnum;
 import com.news.common.exception.TokenException;
 import com.news.pojo.resp.admin.AdminTokenResp;
 import com.news.pojo.resp.player.PlayerTokenResp;
@@ -24,7 +23,7 @@ public class TokenTools {
      * @return
      */
     public static AdminTokenResp getAdminToken() {
-        AdminTokenResp adminTokenResp = ehcacheService.getCache(CacheTypeEnum.ADMIN_TOKEN).get(HttpTools.getHeaderToken(), AdminTokenResp.class);
+        AdminTokenResp adminTokenResp = ehcacheService.adminTokenCache().get(HttpTools.getHeaderToken());
         if (adminTokenResp == null) {
             throw new TokenException();
         }
@@ -37,7 +36,7 @@ public class TokenTools {
      * @return
      */
     public static PlayerTokenResp getPlayerToken() {
-        PlayerTokenResp playerTokenResp = ehcacheService.getCache(CacheTypeEnum.PLAYER_TOKEN).get(HttpTools.getHeaderToken(), PlayerTokenResp.class);
+        PlayerTokenResp playerTokenResp = ehcacheService.playerTokenCache().get(HttpTools.getHeaderToken());
         if (playerTokenResp == null) {
             throw new TokenException();
         }

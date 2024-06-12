@@ -4,8 +4,6 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.api.R;
-import com.news.common.annotation.AdminLoginCheck;
-import com.news.common.constant.enums.CacheTypeEnum;
 import com.news.common.exception.AccountOrPasswordException;
 import com.news.common.exception.DataException;
 import com.news.common.tools.CodeTools;
@@ -21,8 +19,8 @@ import com.news.service.EhcacheService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.ehcache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.Cache;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,7 +44,7 @@ public class AdminInfoController {
     public R<AdminTokenResp> login(@RequestBody @Valid AdminLoginReq req) {
         log.info("登录入参:{}", JSONUtil.toJsonStr(req));
 
-        String verificationCode = ehcacheService.getString(CacheTypeEnum.VERIFICATION_CODE, HttpTools.getIp());
+        String verificationCode = ehcacheService.verificationCache().get(HttpTools.getIp());
         if (verificationCode == null || !verificationCode.equals(req.getVerificationCode())){
             throw new DataException("验证码有误");
         }
@@ -56,12 +54,10 @@ public class AdminInfoController {
             throw new AccountOrPasswordException();
         }
 
-        Cache cache = ehcacheService.getCache(CacheTypeEnum.ADMIN_TOKEN);
-
         String tokenId = GenerateTools.createTokenId();
         AdminTokenResp adminTokenResp = BeanUtil.toBean(adminInfo, AdminTokenResp.class);
         adminTokenResp.setTokenId(tokenId);
-        cache.put(tokenId, adminTokenResp);
+        ehcacheService.adminTokenCache().put(tokenId, adminTokenResp);
 
         return R.ok(adminTokenResp);
     }
